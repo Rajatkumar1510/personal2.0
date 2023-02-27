@@ -1,0 +1,212 @@
+import { ObjectId } from "mongodb";
+import { Document, model, Schema } from "mongoose";
+const businessSchema = new Schema(
+    {
+        business_subdomain: { type: String, unique: true },
+        domain: { type: String },
+        business_subdomain_store: { type: String },
+        business_name: { type: String, required: true },
+        business_category: { type: String, required: true },
+        business_owner_details: [{
+            business_owner_name: { type: String },
+            business_owner_name_head: { type: String, default: "Principal’s Welcome" },
+            business_owner_designation: { type: String },
+            business_owner_profile_photo: { type: String },
+            business_owner_message: { type: String },
+        }],
+        // business_shop_category: { type: String },
+        business_shop_category: [{ type: Schema.Types.ObjectId }],
+        ecommerce_industry: { type: String },
+        business_shop_type: { type: String },
+        business_locality: { type: String },
+        business_address: { type: String },
+        business_address_line2: { type: String },
+        business_address_line3: { type: String },
+        business_email: { type: String },
+        business_phone: { type: String }, //required: true
+        business_phone_country_code: { type: String },
+        business_private_domain: { type: String },
+        business_website: { type: String },
+        business_country: { type: String },
+        business_state: { type: String },
+        business_city: { type: String },
+        business_zipcode: { type: String },
+        business_logo: { type: String },
+        business_about: { type: String },
+        business_about_head: { type: String },
+        business_about_subhead: { type: String },
+        business_mission: { type: String },
+        business_mission_head: { type: String },
+        business_mission_subhead: { type: String },
+        business_about_upload: { type: String },
+        business_vision: { type: String },
+        business_vision_head: { type: String },
+        business_vision_subhead: { type: String },
+        business_owner_name: { type: String },
+        business_owner_designation: { type: String },
+        business_owner_profile_photo: { type: String },
+        business_owner_message: { type: String },
+        business_intro_video: { type: String },
+        business_intro_title: { type: String },
+        business_intro_description: { type: String },
+        business_Exit_Domain_Name: { type: String },
+        business_Exit_Domain_Provider: { type: String },
+        business_Exit_Domain_Expiry_Date: { type: String },
+        business_Exit_Domain_Message: { type: String },
+        business_Exit_Domain: { type: Boolean },
+        razorpay_acount_id: { type: String },
+        account_number: { type: String },
+        account_type: { type: String, trim: true },
+        account_beneficiary_name: { type: String, trim: true },
+        account_business_email: { type: String, trim: true },
+        account_ifsc_code: { type: String, trim: true },
+        razorpay_account_activation_date: { type: Date },
+        banners: [
+            {
+                business_featured_banner: { type: String },
+                business_featured_headline: { type: String },
+                business_short_description: { type: String },
+                business_featured_mobile_banner: { type: String },
+                business_featured_banner_Active: { type: String },
+                business_featured_banner_Url: { type: String }
+            }
+        ],
+        favIcon: { type: String },
+        meta_title: { type: String },
+        meta_description: { type: String },
+        meta_keywords: { type: String },
+        og_tag: { type: String },
+        google_analytics_tag: { type: String },
+        contact_support: { type: String },
+        added_Contact: { type: String },
+        facebook_url: { type: String },
+        linkedin_url: { type: String },
+        twitter_url: { type: String },
+        instagram_url: { type: String },
+        youtube_url: { type: String },
+        totallike: { type: Number, default: 0 },
+        featured: { type: Boolean, default: false },
+        owner: { type: Schema.Types.ObjectId, ref: "user" },
+        isDeleted: { type: Boolean, default: false },
+        session: {
+            sessionExist: { type: Boolean, default: false },
+            sessionFrom: { type: String },
+            sessionTo: { type: String }
+        },
+        business_short_name: { type: String },
+        business_is_pwa: { type: Boolean, default: false },
+        dynamic_header: [{
+            path: { type: String },
+            text_value: { type: String },
+            isActive: { type: Boolean, default: true }
+        }],
+        og_title: { type: String },
+        og_description: { type: String },
+        location_url: { type: String },
+        opening_time: { type: String },
+        closing_time: { type: String },
+        servicing_days: [{ type: String }],
+        optional_address: { type: String },
+
+        cash_on_delivery_enabled: { type: Boolean, default: true },
+        cash_on_delivery_price_limit: { type: Number, default: 0 },
+        cod_price_limitation: { type: Boolean, default: false },
+        show_shop_on_header: { type: Boolean, default: true },
+        show_shop_on_footer: { type: Boolean, default: true },
+        shop_name: { type: String },
+        longitude: { type: String },
+        latitude: { type: String },
+        smtp_email: { type: String },
+        smtp_password: { type: String },
+        showUserSideMap: { type: Boolean },
+        place_Name_Map: { type: String },
+        smtp_port: { type: Number },
+        smtp_host: { type: String },
+        custom_smtp: { type: Boolean, default: false },
+        custom_smtp_email: { type: String },
+        custom_smtp_password: { type: String },
+        custom_smtp_host: { type: String },
+        custom_smtp_port: { type: String },
+        razorpay_onboarding_account_name: { type: String },
+        language: {
+            primaryLanguage: { type: String },
+            symbol: { type: String },
+            multipleLanguage: { type: Boolean, default: false }
+        },
+        primaryCurrency: {
+            currency: { type: String, default: "Indian rupee" },
+            ISOCode: { type: String, default: "INR" },
+            commision: Number,
+            enabled: { type: Boolean, default: true }
+        },
+        currencyList: [{
+            currency: String,
+            ISOCode: String,
+            commision: Number,
+            enabled: { type: Boolean, default: true },
+            primary: { type: Boolean }
+        }],
+        defaultCategoryCheck: { type: Boolean, default: false },
+        defaultCategory: [
+            {
+                category_level: Number,
+                id: [ObjectId]
+            }
+        ],
+        shipTrackingPartner: [{
+            shipping_partner: { type: String },
+            tracking_url: { type: String }
+        }],
+        has_razorpay: { type: Boolean, default: false },
+        razorpay_api_key: { type: String },
+        razorpay_api_secret: { type: String },
+        featuresUIDOwned: [{ type: String }],
+        featureOwned: [{
+            feature_id: { type: Schema.Types.ObjectId, ref: "features" },
+            expiry_date: { type: String },
+            buy_date: { type: String },
+            trial: { type: Boolean },
+            expired: { type: Boolean, default: false }
+
+        }],
+        write_review: { type: String, enum: ["anyone", "buyer", "none"], default: "anyone" },
+        template_type: { type: String, enum: ["dynamic", "static"], default: "dynamic" },
+    },
+    {
+        timestamps: true,
+    }
+);
+
+export interface IBusiness {
+    business_subdomain: String,
+    business_domain: String,
+    business_name: String,
+    business_category: String,
+    business_locality: String,
+    business_address: String,
+    business_email: String,
+    business_phone: String, //required: true
+    business_website: String,
+    business_country: String,
+    business_state: String,
+    business_city: String,
+    business_zipcode: String,
+    business_logo: String,
+    business_about: String,
+    business_mission: String,
+    business_owner_name: String,
+    business_owner_designation: String,
+    business_owner_profile_photo: String,
+    business_owner_message: String,
+    business_featured_banner: String,
+    business_featured_headline: String,
+    business_short_description: String,
+    totallike: Number,
+    owner: ObjectId,
+    business_short_name: String,
+    business_is_pwa: Boolean,
+    _id: ObjectId
+};
+
+export default model("business", businessSchema);
+
